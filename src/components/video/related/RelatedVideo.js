@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function RelatedVideo({ video }) {
 
-    const { id, title, channelTitle, publishTime, views, duration, thumbnail } = video;
+    const { id, title, author, date, views, duration, thumbnail } = video;
 
     return (
         <div className="w-full flex flex-row gap-2 mb-4">
@@ -26,10 +26,10 @@ export default function RelatedVideo({ video }) {
                     </p>
                 </Link>
                 <span className="text-gray-400 text-xs mt-2 hover:text-gray-600">
-                    {channelTitle}
+                    {author}
                 </span>
                 <p className="text-gray-400 text-xs mt-1">
-                    {views} views . {publishTime}
+                    {views} views . {date}
                 </p>
             </div>
         </div>
