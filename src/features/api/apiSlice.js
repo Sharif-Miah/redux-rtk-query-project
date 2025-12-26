@@ -7,7 +7,18 @@ export const apiSlice = createApi({
     getVideos: builder.query({
       query: () => '/videos',
     }),
+    getVideo: builder.query({
+      query: (videosId) => `/videos/${videosId}`,
+    }),
+    getReletedVideos: builder.query({
+      query: ({id, title}) => {
+        const tags = title.split(" ")
+        const likes = tags.map(tag => `tags_like=${tag}`)
+        const queryString = `/videos?${likes.join("&")}&_limit=4`;
+        return queryString
+      },
+    }),
   }),
 });
 
-export const { useGetVideosQuery } = apiSlice;
+export const { useGetVideosQuery, useGetVideoQuery } = apiSlice;

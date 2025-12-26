@@ -1,17 +1,19 @@
 import { Link } from "react-router-dom";
 import authorImage from "../../assets/author.png";
 
-export default function Video() {
+export default function Video({ video }) {
+    const {thumbnail, title, date} = video;
     return (
         <div className="col-span-12 sm:col-span-6 md:col-span-3 duration-300 hover:scale-[1.03]">
             <div className="w-full flex flex-col">
                 <div className="relative">
-                    <Link to="/videos/1">
+                    <Link to={`/videos/${video?.id}`}>
                         <img
-                            src="https://i3.ytimg.com/vi/6O4s7v28nlw/maxresdefault.jpg"
+                            src={thumbnail}
                             className="w-full h-auto"
-                            alt="Some video title"
+                            alt={video?.title}
                         />
+                        
                     </Link>
 
                     <p className="absolute right-2 bottom-2 bg-gray-900 text-gray-100 text-xs px-1 py">
@@ -26,17 +28,17 @@ export default function Video() {
                         alt="Learn with Sumit"
                     />
 
-                    <div clas="flex flex-col">
-                        <Link to="/videos/1">
+                    <div className="flex flex-col">
+                        <Link to={`/videos/${video?.id}`}>
                             <p className="text-slate-900 text-sm font-semibold">
-                                Video title
+                                {title}
                             </p>
                         </Link>
                         <span className="text-gray-400 text-xs hover:text-gray-600">
                             Learn with Sumit
                         </span>
                         <p className="text-gray-400 text-xs">
-                            200 views . May 3, 2022
+                            200 views . {date}
                         </p>
                     </div>
                 </div>
