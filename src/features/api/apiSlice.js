@@ -3,9 +3,12 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const apiSlice = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:9000' }),
+  tagTypes: ["Videos"],
   endpoints: (builder) => ({
     getVideos: builder.query({
       query: () => '/videos',
+      keepUnusedDataFor: 600,
+      providesTags: ["Videos"]
     }),
     getVideo: builder.query({
       query: (videosId) => `/videos/${videosId}`,
@@ -18,7 +21,17 @@ export const apiSlice = createApi({
         return queryString
       },
     }),
+    addVideos: builder.mutation({
+      query: (data) => ({
+        url: "/videos",
+        method: "POST",
+        body: data
+      }),
+      invalidatesTags: ["Videos"]
+    }),
+    
+    
   }),
 });
 
-export const { useGetVideosQuery, useGetVideoQuery, useGetReletedVideosQuery } = apiSlice;
+export const { useGetVideosQuery, useGetVideoQuery, useGetReletedVideosQuery, useAddVideosMutation } = apiSlice;
